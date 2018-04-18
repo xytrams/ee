@@ -34,7 +34,7 @@ public class FizzBuzzTests {
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 1, 2, 3, 4, 5, 0, -1, -4, -10 })
+	@ValueSource(ints = { 1, 2, 4, 5, 0, -1, -4, -10 })
 	@DisplayName("Should return empty string if start and end are the same")
 	public void handle_empty_range(int input) {
 		int start = input, end = input - 1;
@@ -44,7 +44,7 @@ public class FizzBuzzTests {
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 1, 2, 4, -1, -4, -11, 91, 13001, -832 })
+	@ValueSource(ints = { 1, 2, 4, -1, -4, -11, 91, 12001, -842 })
 	@DisplayName("Should return just a number, no special case")
 	public void handle_nonSpecial_number(int input) {
 		int start = input, end = input;
@@ -54,7 +54,7 @@ public class FizzBuzzTests {
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 3, 6, 9, 12, -3, -6, -9, -12, -99, 111, -999, 12012 })
+	@ValueSource(ints = {6, 9, 12, -6, -9, -12, -99, 111, -999, 12012 })
 	@DisplayName("Should return 'fizz' for multiples of '3'")
 	public void handle_3_case(int input) {
 		int start = input, end = input;
@@ -64,7 +64,7 @@ public class FizzBuzzTests {
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 5, 10, 20, 55, -5, -10, -35, -95, 5000 })
+	@ValueSource(ints = { 5, 10, 20, 55, -5, -10, -55, -95, 5000 })
 	@DisplayName("Should return 'buzz' for multiples of '5'")
 	public void handle_5_case(int input) {
 		int start = input, end = input;
@@ -74,7 +74,7 @@ public class FizzBuzzTests {
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 15, 30, 60, -15, -90, -12000, 525 })
+	@ValueSource(ints = { 0, 15, 45, 60, -15, -90, -12000, 525 })
 	@DisplayName("Should return 'fizzbuzz' for multiples of '15'")
 	public void handle_15_case(int input) {
 		int start = input, end = input;
@@ -84,29 +84,39 @@ public class FizzBuzzTests {
 	}
 
 	@Test
-	@DisplayName("Should return '1 2 fizz 4 buzz fizz 7 8 fizz buzz 11 fizz 13 14 fizzbuzz 16 17 fizz 19 buzz' for 1 to 20 range")
+	@DisplayName("Should return 'fizzbuzz' for '0'")
+	public void handle_0_case() {
+		int start = 0, end = 0;
+
+		String result = fizzbuzz.convert(start, end);
+		assertThat(result, is("fizzbuzz"));
+	}
+
+	@Test
+	@DisplayName("Should return '1 2 lucky 4 buzz fizz 7 8 fizz buzz 11 fizz lucky 14 fizzbuzz 16 17 fizz 19 buzz' for 1 to 20 range")
 	public void handle_positive_range() {
 		int start = 1, end = 20;
 
 		String result = fizzbuzz.convert(start, end);
-		assertThat(result, is("1 2 fizz 4 buzz fizz 7 8 fizz buzz 11 fizz 13 14 fizzbuzz 16 17 fizz 19 buzz"));
+		assertThat(result, is("1 2 lucky 4 buzz fizz 7 8 fizz buzz 11 fizz lucky 14 fizzbuzz 16 17 fizz 19 buzz"));
 	}
 
 	@Test
-	@DisplayName("Should return 'buzz -19 fizz -17 -16 fizzbuzz -14 -13 fizz -11 buzz fizz -8 -7 fizz buzz -4 fizz -2 -1' for -20 to -1 range")
+	@DisplayName("Should return 'buzz -19 fizz -17 -16 fizzbuzz -14 lucky fizz -11 buzz fizz -8 -7 fizz buzz -4 lucky -2 -1' for -20 to -1 range")
 	public void handle_negative_range() {
 		int start = -20, end = -1;
 
 		String result = fizzbuzz.convert(start, end);
-		assertThat(result, is("buzz -19 fizz -17 -16 fizzbuzz -14 -13 fizz -11 buzz fizz -8 -7 fizz buzz -4 fizz -2 -1"));
+		assertThat(result, is("buzz -19 fizz -17 -16 fizzbuzz -14 lucky fizz -11 buzz fizz -8 -7 fizz buzz -4 lucky -2 -1"));
 	}
 
 	@Test
-	@DisplayName("Should return 'fizzbuzz -14 -13 fizz -11 buzz fizz -8 -7 fizz buzz -4 fizz -2 -1 fizzbuzz 1 2 fizz 4 buzz fizz 7 8 fizz buzz 11 fizz 13 14 fizzbuzz' for -15 to 15 range")
+	@DisplayName("Should return 'fizzbuzz -14 lucky fizz -11 buzz fizz -8 -7 fizz buzz -4 lucky -2 -1 fizzbuzz 1 2 lucky 4 buzz fizz 7 8 fizz buzz 11 fizz lucky 14 fizzbuzz' for -15 to 15 range")
 	public void handle_mixed_range() {
 		int start = -15, end = 15;
 
 		String result = fizzbuzz.convert(start, end);
-		assertThat(result, is("fizzbuzz -14 -13 fizz -11 buzz fizz -8 -7 fizz buzz -4 fizz -2 -1 fizzbuzz 1 2 fizz 4 buzz fizz 7 8 fizz buzz 11 fizz 13 14 fizzbuzz"));
+		assertThat(result, is("fizzbuzz -14 lucky fizz -11 buzz fizz -8 -7 fizz buzz -4 lucky -2 -1 fizzbuzz 1 2 lucky 4 buzz fizz 7 8 fizz buzz 11 fizz lucky 14 fizzbuzz"));
 	}
+
 }
