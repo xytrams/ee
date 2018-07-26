@@ -16,7 +16,7 @@ public class InterestCalculator {
 	}
 
 	public BigDecimal getInterest(BigDecimal amount, List<InterestFunction> bands) {
-		Optional<InterestFunction> allBands = bands.stream().reduce((f1, f2) -> f1.compose(f2));
+		Optional<InterestFunction> allBands = bands.stream().reduce((f1, f2) -> (InterestFunction)f1.compose(f2));
 
 		return allBands.isPresent() ? allBands.get().apply(amount) : amount;
 	}

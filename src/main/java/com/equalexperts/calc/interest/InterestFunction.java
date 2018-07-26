@@ -22,7 +22,8 @@ public class InterestFunction implements Function<BigDecimal, BigDecimal> {
 		return result;
 	}
 
-	public InterestFunction compose(InterestFunction before) {
-		return ;
+	@Override
+	public <V> Function<V, BigDecimal> compose(Function<? super V, ? extends BigDecimal> before) {
+		return Function.super.compose(before);
 	}
 }
