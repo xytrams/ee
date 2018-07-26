@@ -7,7 +7,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-group = 'com.equalexperts.fb'
+group = 'com.equalexperts.calc'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
